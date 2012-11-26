@@ -1,18 +1,4 @@
-# append-only
-
-Append only scuttlebutt structure
-
-## Example
-
-Represent an append only data structure through scuttlebutt.
-
-You push new pieces of data onto the list. You can also remove
-a item from the list (which is actually an append only message).
-
-`append-only` generates a unique `__id` on your item for you.
-
-```js
-var AppendOnly = require("append-only")
+var AppendOnly = require("..")
     , list1 = AppendOnly()
     , list2 = AppendOnly()
 
@@ -42,14 +28,3 @@ var stream1 = list1.createStream()
     , stream2 = list2.createStream()
 
 stream1.pipe(stream2).pipe(stream1)
-```
-
-## Installation
-
-`npm install append-only`
-
-## Contributors
-
- - Raynos
-
-## MIT Licenced
