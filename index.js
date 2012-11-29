@@ -38,8 +38,6 @@ function applyUpdate(update) {
         , ts = update[2]
         , source = update[3]
 
-    // console.log("applyUpdate", update)
-
     this._store.push(update)
 
     if (value.push) {
