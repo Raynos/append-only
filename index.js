@@ -26,17 +26,17 @@ function AppendOnly(options) {
 }
 
 function push(item) {
-    this.localUpdate("0", { push: item })
+    this.localUpdate({ push: item })
 }
 
 function remove(id) {
-    this.localUpdate("0", { remove: id })
+    this.localUpdate({ remove: id })
 }
 
 function applyUpdate(update) {
-    var value = update[1]
-        , ts = update[2]
-        , source = update[3]
+    var value = update[0]
+        , ts = update[1]
+        , source = update[2]
 
     // console.log("applyUpdate", update)
 
