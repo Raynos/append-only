@@ -20,7 +20,9 @@
     "scuttlebutt": "~5.0.0"
   },
   "devDependencies": {
-    "tap": "~0.3.1"
+    "tap": "~0.3.1",
+    "tape": "0.0.5",
+    "macgyver": "~1.9.2"
   },
   "licenses": [
     {

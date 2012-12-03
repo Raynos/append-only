@@ -30,32 +30,39 @@ function push(item) {
 }
 
 function remove(id) {
-    this.localUpdate({ remove: id })
+    this.localUpdate({ remove: id.__id ? id.__id : id })
+}
+
+function toId (update) {
+    var ts = update[1]
+        , source = update[2]
+
+    return source + ":" + ts
 }
 
 function applyUpdate(update) {
     var value = update[0]
-        , ts = update[1]
-        , source = update[2]
 
     this._store.push(update)
 
     if (value.push) {
         var item = value.push
-            , id = source + ":" + ts
+            , id = toId(update)
 
         Object.defineProperty(item, "__id", {
             value: id
             , configurable: true
         })
-        this._hash[id] = item
+        this._hash[id] = update
         this.emit("item", item)
     } else if (value.remove) {
         var id = value.remove
-            , item = this._hash[id]
+            , _update = this._hash[id]
 
         ;delete this._hash[id]
-        this.emit("remove", item)
+
+        this.emit("_remove", _update)
+        this.emit("remove", _update[0].push)
     }
     return true
 }
@@ -73,5 +80,5 @@ function createArray() {
 }
 
 function findKey(key) {
-    return this[key]
+    return this[key][0].push
 }

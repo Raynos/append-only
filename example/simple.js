@@ -5,6 +5,9 @@ var AppendOnly = require("..")
     , list2 = AppendOnly()
     , counter = 0
 
+list1.type = "list1"
+list2.type = "list2"
+
 list1.on("item", function (item) {
     if (item.more) {
         list1.remove(item.__id)
