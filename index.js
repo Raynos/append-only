@@ -21,8 +21,20 @@ function AppendOnly(options) {
 
     Scuttlebutt.call(this, options)
 
-    this._store = []
+    var store = this._store = []
     this._hash = {}
+
+    this.on("_remove", function (update, update2) {
+        var index = store.indexOf(update)
+        if (index !== -1) {
+            store.splice(index, 1)
+        }
+
+        index = store.indexOf(update2)
+        if (index !== -1) {
+            store.splice(index, 1)
+        }
+    })
 }
 
 function push(item) {
@@ -61,7 +73,7 @@ function applyUpdate(update) {
 
         ;delete this._hash[id]
 
-        this.emit("_remove", _update)
+        this.emit("_remove", _update, update)
         this.emit("remove", _update[0].push)
     }
     return true

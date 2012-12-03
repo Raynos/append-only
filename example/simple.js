@@ -20,6 +20,12 @@ list1.push({ more: "data" })
 list2.on("item", function (item) {
     counter++
     console.log("items", item)
+
+    if (item.some === "data") {
+        var obj = { "hello": "world" }
+        list1.push(obj)
+        list1.remove(obj)
+    }
 })
 
 list2.on("remove", function (item) {
