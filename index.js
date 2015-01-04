@@ -24,13 +24,13 @@ function AppendOnly(options) {
     var store = this._store = []
     this._hash = {}
 
-    this.on("_remove", function (update, update2) {
-        var index = store.indexOf(update)
+    this.on("_remove", function (pushUpdate, removeUpdate) {
+        var index = store.indexOf(pushUpdate)
         if (index !== -1) {
             store.splice(index, 1)
         }
 
-        index = store.indexOf(update2)
+        index = store.indexOf(removeUpdate)
         if (index !== -1) {
             store.splice(index, 1)
         }
@@ -69,7 +69,7 @@ function applyUpdate(update) {
         this.emit("item", item)
     } else if (value.remove) {
         var id = value.remove
-            , _update = this._hash[id]
+            , _update = this._hash[id];
 
         ;delete this._hash[id]
 
